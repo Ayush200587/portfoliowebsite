@@ -1,0 +1,272 @@
+
+@tailwind components;
+
+@layer components {
+  /* Enhanced borders and containers */
+  .pixel-border { 
+    @apply border-2 border-border box-border shadow-sm;
+    position: relative;
+  }
+
+  .pixel-border::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent 40%, rgba(25, 240, 233, 0.2) 50%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .pixel-border:hover::after {
+    opacity: 1;
+  }
+
+  /* Enhanced pixel button with new states */
+  .pixel-button {
+    @apply px-4 py-2 font-pixel text-sm text-white bg-pixel-blue border-2 border-b-4 
+      hover:bg-pixel-teal hover:translate-y-[1px] hover:border-b-2 
+      transition-all duration-300 active:bg-pixel-blue-accent
+      focus:outline-none focus:ring-2 focus:ring-pixel-teal/50 relative overflow-hidden;
+  }
+  
+  .pixel-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .pixel-button:hover::before {
+    left: 100%;
+  }
+
+  .pixel-button-animated {
+    @apply animate-pulse shadow-[0_0_18px_3px_rgba(25,240,233,0.58)];
+  }
+
+  /* Enhanced pixel card with gradient borders */
+  .pixel-card {
+    @apply bg-card p-5 sm:p-6 border-2 border-border shadow-md transition-all duration-300 hover:border-pixel-teal relative;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card)) 100%);
+  }
+  
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, rgba(25, 240, 233, 0.5), rgba(34, 65, 119, 0.5), rgba(25, 240, 233, 0.5));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .pixel-card:hover::before {
+    opacity: 1;
+  }
+  
+  .pixel-card:hover {
+    box-shadow: 0 0 22px 4px #19f0e899 !important;
+    transform: translateY(-2px);
+  }
+
+  /* New holographic effect */
+  .holographic-text {
+    background: linear-gradient(45deg, #19f0e9, #224177, #19f0e9, #2767b0);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: holographic 3s ease-in-out infinite;
+  }
+
+  @keyframes holographic {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Enhanced progress bars */
+  .pixel-progress { 
+    position: relative; 
+    height: 16px; 
+    @apply bg-muted border border-border overflow-hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .pixel-progress-bar { 
+    height: 100%; 
+    @apply bg-pixel-teal transition-all duration-1000 ease-out relative;
+    animation: progress-fill 1s ease-out;
+    background: linear-gradient(90deg, currentColor 0%, rgba(255,255,255,0.3) 50%, currentColor 100%);
+  }
+
+  .pixel-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shine 2s ease-in-out infinite;
+  }
+
+  @keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* New glitch effect for text */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    animation: glitch-1 0.5s infinite;
+    color: #19f0e9;
+    z-index: -1;
+  }
+
+  .glitch-text::after {
+    animation: glitch-2 0.5s infinite;
+    color: #224177;
+    z-index: -2;
+  }
+
+  @keyframes glitch-1 {
+    0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+    15%, 49% { transform: translate(-2px, -1px); }
+  }
+
+  @keyframes glitch-2 {
+    0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+    21%, 62% { transform: translate(2px, 1px); }
+  }
+
+  /* Container and layout improvements */
+  .pixel-container { @apply w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8; }
+  
+  /* Enhanced terminal with better light mode support */
+  .pixel-terminal { 
+    @apply font-mono border-2 border-pixel-teal p-3 rounded-none shadow-[0_0_8px_rgba(25,240,233,0.5)] relative;
+    background: linear-gradient(135deg, rgba(15, 26, 44, 0.95) 0%, rgba(15, 26, 44, 0.98) 100%);
+  }
+  
+  .dark .pixel-terminal {
+    background: linear-gradient(135deg, rgba(15, 26, 44, 0.95) 0%, rgba(15, 26, 44, 0.98) 100%);
+  }
+  
+  .pixel-terminal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 40%, rgba(25, 240, 233, 0.1) 50%, transparent 60%);
+    animation: scan-line 2s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .pixel-terminal-text { @apply text-pixel-teal; }
+  .pixel-terminal-cursor { @apply inline-block w-2 h-4 bg-pixel-green ml-1 align-middle animate-pixel-blink; }
+
+  /* Enhanced sections with better spacing */
+  .pixel-section { @apply py-16 md:py-24 pixel-hover-section relative; }
+  
+  .pixel-hover-section { @apply transition-all duration-300; }
+  .pixel-hover-section:hover, .pixel-hover-section:focus-within {
+    @apply border-4 border-pixel-teal shadow-[0_0_25px_6px_rgba(25,240,233,0.26)];
+    background: linear-gradient(110deg, rgba(15, 26, 44, 0.02) 60%, rgba(25, 240, 233, 0.05) 100%);
+  }
+  
+  .dark .pixel-hover-section:hover, .dark .pixel-hover-section:focus-within {
+    background: linear-gradient(110deg, #0f1a2c 60%, #19f0e911 100%);
+  }
+
+  .pixel-glow-animate { 
+    @apply animate-[pulse_1.9s_ease-in-out_infinite]; 
+    box-shadow: 0 0 25px 4px #19f0e873; 
+  }
+
+  /* Hero title with enhanced effects */
+  .hero-title {
+    @apply font-pixel text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed font-bold text-center relative;
+    text-shadow: 2px 2px 0px theme('colors.pixel-blue-accent');
+  }
+
+  .dark .hero-title {
+    text-shadow: 2px 2px 0px theme('colors.pixel-blue-accent');
+  }
+
+  /* Enhanced terminal window */
+  .terminal-window { 
+    @apply relative overflow-hidden; 
+    box-shadow: 0 0 20px rgba(25, 240, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); 
+  }
+
+  /* Enhanced connect links */
+  .connect-link { 
+    @apply flex items-center space-x-4 p-4 border-2 border-border relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+  
+  .connect-link::before { 
+    content: ''; 
+    @apply absolute inset-0 bg-accent/10 -translate-x-full transition-transform duration-300; 
+  }
+  
+  .connect-link:hover::before { @apply translate-x-0; }
+  .connect-link:hover { 
+    @apply border-pixel-blue transform translate-x-2; 
+    box-shadow: 0 4px 12px rgba(25, 240, 233, 0.3);
+  }
+
+  /* New decorative elements */
+  .pixel-decoration {
+    position: relative;
+  }
+
+  .pixel-decoration::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(25, 240, 233, 0.1) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(34, 65, 119, 0.1) 50%, transparent 100%);
+    animation: matrix-rain 3s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes matrix-rain {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+}

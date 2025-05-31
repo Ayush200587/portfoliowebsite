@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software Engineer Portfolio: By Ayush Kumar</title>
+    <meta name="description" content="Turning coffee into clean code ☕→💻" />
+    <meta name="author" content="Ayush Kumar" />
+    <meta name="theme-color" content="#0f1a2c" />
+
+    <meta property="og:title" content="Software Engineer Portfolio: By Ayush Kumar" />
+    <meta property="og:description" content="Turning coffee into clean code ☕→💻" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Theme color updater -->
+    <script>
+      // Update theme-color based on user preference
+      const updateThemeColor = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', 
+          isDark ? '#0f172a' : '#f1f5f9');
+      };
+      
+      // Initial check
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+      
+      // Update on change
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        updateThemeColor();
+      });
+      
+      // Run on page load
+      document.addEventListener('DOMContentLoaded', updateThemeColor);
+      
+      // Custom event for theme changes via button
+      document.addEventListener('themeChange', updateThemeColor);
+    </script>
+  </body>
+</html>
